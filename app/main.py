@@ -1,14 +1,37 @@
 from fastapi import FastAPI
-from .database import engine
-from . import models
-from .routes import auth_routes, user_routes
 
-# Create DB tables
-models.Base.metadata.create_all(bind=engine)
+from app.db.database import engine
+from app.models import user
+from app.api.routes import auth_routes, user_routes
 
-app = FastAPI(title="Fitness Assistant API")
 
-# Include routers
-app.include_router(auth_routes.router)
+# -----------------------------
+# Create database tables
+# -----------------------------
+user.Base.metadata.create_all(bind=engine)
 
-app.include_router(user_routes.router)
+
+# -----------------------------
+# Create FastAPI app
+# -----------------------------
+app = FastAPI(
+    title="Fitness Assistant API",
+    description="Backend API for GymFoods Fitness Assistant",
+    version="1.0.0"
+)
+
+
+# -----------------------------
+# Include API Routers
+# -----------------------------
+app.include_router(
+    auth_routes.router,
+    prefix="/api/v1/auth",
+    tags=["Authentication"]
+)
+
+app.include_router(
+    user_routes.router,
+    prefix="/api/v1/users",
+    tags=["Users"]
+)
