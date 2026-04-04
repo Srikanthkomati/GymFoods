@@ -2,8 +2,8 @@ from fastapi import FastAPI
 
 from app.db.database import engine
 from app.models import user
-from app.api.routes import auth_routes, user_routes
-
+from app.api.routes import auth_routes, user_routes, food_routes
+from app.api.routes import meal_routes
 
 # -----------------------------
 # Create database tables
@@ -35,3 +35,8 @@ app.include_router(
     prefix="/api/v1/users",
     tags=["Users"]
 )
+
+app.include_router(food_routes.router, prefix="/api/v1/foods")
+
+
+app.include_router(meal_routes.router, prefix="/api/v1/meals")

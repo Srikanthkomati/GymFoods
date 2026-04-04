@@ -27,6 +27,8 @@ class User(Base):
     city = Column(String)
     diet_type = Column(String)
     budget = Column(String)
+    activity_level = Column(String)  
+    # sedentary / moderate / active
 
     # Account Status
     is_active = Column(Boolean, default=True)

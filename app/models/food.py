@@ -14,7 +14,7 @@ class Food(Base):
     calories = Column(Float, nullable=False)
     protein = Column(Float, nullable=False)
     carbs = Column(Float, nullable=False)
-    fat = Column(Float, nullable=False)
+    fats = Column(Float, nullable=False)
 
     category = Column(String, nullable=True)   # veg / non-veg / vegan
 
